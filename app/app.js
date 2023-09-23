@@ -14,6 +14,9 @@ app.use('/', usersRouter)
 
 app.use('/', bookingsRouter)
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to the monday bookings api' });
+});
 
 
 
