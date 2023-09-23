@@ -1,35 +1,28 @@
 const User = require("../model/User/User");
+const AsyncHandler = require("express-async-handler");
+const generateToken = require('../utils/generateToken')
+const { hashPassword, isPassMatched } = require("../utils/helpers");
 
 //Login a user
-exports.loginController = async (req, res) => {
-    const {email, password} = req.body;
-    try {
-        //find user
-        const user = await User.findOne(email)
-        if (!user) {
-            return res.json({
-                status: 'failure',
-                message: 'User not found'
-            })
-        }
-        if (user && await user.verifyPassword(password)) {
-            return res.json({
-                status: 'success',
-                data: user
-            })
-        } else {
-            return res.json({
-                status: 'failure',
-                message: 'Invalid login credentials'
-            })
-        }
-    } catch (error) {
-        return res.json({
-            status: 'failure',
-            message: error.message
-        })
+exports.loginController = AsyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+    //find user
+    const user = await User.findOne({ email });
+    if (!user) {
+        return res.json({ message: "Invalid login crendentials" });
     }
-}
+    //verify password
+    const isMatched = await isPassMatched(password, user.password);
+
+    if (!isMatched) {
+        return res.json({ message: "Invalid login crendentials" });
+    } else {
+        return res.json({
+            data: generateToken(user._id),
+            message: "Admin logged in successfully",
+        });
+    }
+})
 
 //Logout a user
 exports.logoutController = (req, res) => {
@@ -50,7 +43,7 @@ exports.registerController = async (req, res) => {
         const user = await User.create({
             name,
             email,
-            password,
+            password: await hashPassword(password),
             role,
         });
         res.status(201).json({

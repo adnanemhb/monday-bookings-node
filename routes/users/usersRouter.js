@@ -8,9 +8,9 @@ const {
 
 const usersRouter = express.Router()
 
-usersRouter.get('/login', loginController)
+usersRouter.post('/login', loginController)
 
-usersRouter.get('/logout', logoutController)
+usersRouter.post('/logout', logoutController)
 
 usersRouter.post('/register', registerController)
 
