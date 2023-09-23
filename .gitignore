@@ -1,0 +1,69 @@
+# Node.js and npm
+node_modules/
+package-lock.json
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+.pnp/
+.pnp.js
+
+# Optional eslint cache
+.eslintcache
+
+# Build files
+dist/
+out/
+
+# IDE and Editor files
+.idea/
+.vscode/
+
+# Testing
+coverage/
+
+# OS generated files
+Desktop.ini
+Icon?
+ehthumbs.db
+
+# Yarn integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# OS generated folders
+$RECYCLE.BIN/
+node_modules/
+AppData/
+
+# Mac-specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows-specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of File
