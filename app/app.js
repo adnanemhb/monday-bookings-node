@@ -4,9 +4,11 @@ const app = express()
 const bookingsRouter = require('../routes/bookings/bookingsRouter')
 const usersRouter = require('../routes/users/usersRouter')
 
-//routes
+app.use(morgan('dev'))
+//Pass incoming json data
+app.use(express.json())
 
-app.use('/', usersRouter)
+//routes
 
 app.use('/', usersRouter)
 
